@@ -1,0 +1,61 @@
+\documentclass{article}
+\setlength\parindent{0pt}
+\usepackage{listings, placeins, fullpage, datetime, color, amsmath, graphicx, hyperref, cite}
+
+\begin{document}
+
+\title{COMP4500 - Assignment 2}
+\author{Andrew Whalley}
+\newdate{date}{18}{10}{2014}
+\date{\displaydate{date}}
+
+\maketitle
+
+\section{Question 1}
+\subsection{Part a}
+{\em Provide an efficient algorithm that allows you to collect all the flags and minimises the distance travelled.}\\
+\begin{lstlisting}
+FLAG_FETCH(flags) // flags is an array with f1 through to fn (n flags)
+distance = 0
+flags.sort() // sort in order of shortest distance
+// Priority queue with shortest distance having highest priority
+flag_queue = enqueue(flags)
+distance_array = [] // empty array to store each distance
+while not flag_queue.isEmpty()
+    flag_distance = flag_queue.next()
+    distance += 2*flag_distance
+    foreach flag in distance_array
+        distance += flag
+    distance_array.add(flag_distance)
+\end{lstlisting}
+
+\subsection{Part b}
+{\em Prove that your algorithm in part a is optimal.}\\
+\\
+In order for a greedy algorithm to be considered optimal, it must meet the following two criteria:
+\begin{itemize}
+\item Optimal Substructure.
+\item Greedy Choice Property - A locally optimal solution is a globally optimal solution.
+\end{itemize}
+The problem is a shortest path problem, with the addition of travelling to previously collected flags as well. In this situation, the problem is still a greedy problem. Since the flags are sorted by distance (ascending), the shortest path globally is to travel to the flags in order. This behaviour exhibits the optimal substructure property, because finding the shortest global distance can be done by solving the shortest distance of each individual flag.\\
+\\
+Proof of Greedy Choice Property:\\
+\\
+Let $S_j$ be a nonempty subproblem containing the set of flags that have distance greater than $f_j$. Let $f_m$ be the flag in $S_j$ with the shortest travel distance, then $f_m$ is a part of a maximum-size subset, $F_j$, that consists of mutually compatible flag distances that exist in $S_j$. Define the shortest distance flag in $F_j$ to be $f_k$. If $f_k = f_m$ then the global shortest distance is in a maximum-size subset of mutually compatible flag distances in $S_j$ and the proof is finished.\\
+\\
+Assume ${f_k \neq f_m}$, then define the set ${G_j = F_j - f_k \cup f_m }$ i.e. the set of mutually compatible flag distances in $S_j$ not including $f_k$ or $f_m$. This means that the flags in $G_j$ are disjoint because:
+\begin{itemize}
+\item The flags in $F_j$ are disjoint
+\item $f_k$ is the shortest distance flag in $F_j$
+\item $f_m$ has shorter distance than $f_j$
+\end{itemize}
+Here we have $|G_j| = |F_j|$ so we can conclude that $G_j$ is also a maximum-size subset of mutually compatible flags in $S_j$ and that it includes $f_m$. From this we know that the globally shortest distance exists in $G_j$ and due to it being a maximum-size subset of the original problem set, the algorithm satisfies the Greedy Choice Property. Therefore the algorithm is optimal.
+\begin{thebibliography}{9}
+\bibitem{greedy}
+    Professor Cliff Stein,
+    \emph{Greedy Algorithms}.
+    Analysis of Algorithms 1, Columbia University,
+    \url{http://www.columbia.edu/~cs2035/courses/csor4231.F11/greedy.pdf},
+    Fall 2011.
+\end{thebibliography}
+\end{document}

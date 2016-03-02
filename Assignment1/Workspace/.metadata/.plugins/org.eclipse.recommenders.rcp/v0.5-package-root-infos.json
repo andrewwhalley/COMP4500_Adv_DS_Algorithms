@@ -1,0 +1,158 @@
+[
+  {
+    "symbolicName": "jre",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "micro": 0,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "9c65be66b7d064aa969eed550ce6bca0c930fd4c",
+    "jarFileModificationDate": "2012-09-01T16:38:07.203+10:00",
+    "location": "D:\\Tools\\jdk\\jre\\lib\\jce.jar",
+    "javaRuntime": true
+  },
+  {
+    "symbolicName": "jre",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "micro": 0,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "15b98646d590ca94d8a99fefdd02a8e1d68ca3e1",
+    "jarFileModificationDate": "2012-09-01T16:38:11.774+10:00",
+    "location": "D:\\Tools\\jdk\\jre\\lib\\rt.jar",
+    "javaRuntime": true
+  },
+  {
+    "symbolicName": "jre",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "micro": 0,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "db8fdbdc24f7d4cab855dc43689ef97fff4f9210",
+    "jarFileModificationDate": "2012-09-01T16:38:07.141+10:00",
+    "location": "D:\\Tools\\jdk\\jre\\lib\\ext\\dnsns.jar",
+    "javaRuntime": true
+  },
+  {
+    "symbolicName": "jre",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "micro": 0,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "e65ae48048146e728489c6c707c10ad7034a9c9e",
+    "jarFileModificationDate": "2012-09-01T16:38:07.265+10:00",
+    "location": "D:\\Tools\\jdk\\jre\\lib\\resources.jar",
+    "javaRuntime": true
+  },
+  {
+    "symbolicName": "jre",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "micro": 0,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "fcdd1b9bbeacf7583a7044ecc10f4a886115da19",
+    "jarFileModificationDate": "2012-09-01T16:38:11.821+10:00",
+    "location": "D:\\Tools\\jdk\\jre\\lib\\ext\\localedata.jar",
+    "javaRuntime": true
+  },
+  {
+    "symbolicName": "jre",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "micro": 0,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "956be01d596e74cb476a180fc872544bd9681eb6",
+    "jarFileModificationDate": "2012-09-01T16:38:07.203+10:00",
+    "location": "D:\\Tools\\jdk\\jre\\lib\\jfr.jar",
+    "javaRuntime": true
+  },
+  {
+    "symbolicName": "jre",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "micro": 0,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "f56383db77ae9502e6ca617e57d55ee73d631c46",
+    "jarFileModificationDate": "2012-09-01T16:38:07.141+10:00",
+    "location": "D:\\Tools\\jdk\\jre\\lib\\ext\\sunec.jar",
+    "javaRuntime": true
+  },
+  {
+    "symbolicName": "jre",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "micro": 0,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "70020954a878f151d863091253774186b91b4ac2",
+    "jarFileModificationDate": "2012-09-01T16:38:07.156+10:00",
+    "location": "D:\\Tools\\jdk\\jre\\lib\\ext\\sunmscapi.jar",
+    "javaRuntime": true
+  },
+  {
+    "symbolicName": "jre",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "micro": 0,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "6c96a27b8014a36e4a4447487865f3346edb3209",
+    "jarFileModificationDate": "2012-09-01T16:38:09.902+10:00",
+    "location": "D:\\Tools\\jdk\\jre\\lib\\charsets.jar",
+    "javaRuntime": true
+  },
+  {
+    "symbolicName": "jre",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "micro": 0,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "c30bc35ff3533b25748421df222bed65f2d5956c",
+    "jarFileModificationDate": "2012-09-01T16:38:07.156+10:00",
+    "location": "D:\\Tools\\jdk\\jre\\lib\\ext\\zipfs.jar",
+    "javaRuntime": true
+  },
+  {
+    "symbolicName": "jre",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "micro": 0,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "ececf755ad0be59e88e5cbd67f333420e0cea3a7",
+    "jarFileModificationDate": "2012-09-01T16:38:07.156+10:00",
+    "location": "D:\\Tools\\jdk\\jre\\lib\\ext\\sunjce_provider.jar",
+    "javaRuntime": true
+  },
+  {
+    "symbolicName": "jre",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "micro": 0,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "485f8768388b9b27d7b1dc51f5b3920f7bc00d30",
+    "jarFileModificationDate": "2012-09-01T16:38:10.167+10:00",
+    "location": "D:\\Tools\\jdk\\jre\\lib\\jsse.jar",
+    "javaRuntime": true
+  }
+]

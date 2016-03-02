@@ -1,0 +1,163 @@
+package dependencies;
+
+import java.util.List;
+import java.util.ArrayList;
+
+import dependencies.Primitive.NullStatement;
+import dependencies.Statement.Compound;
+import dependencies.Statement.Repeat;
+import dependencies.Statement.Select;
+import graphs.DGraph;
+import graphs.DGraphAdj;
+import graphs.Graph.AdjacentEdge;
+
+public class FlowGraph {
+    /** Control flow graph for a function */
+    DGraph<ControlFlowNode,Primitive> graph;
+    /** Unique entry and exit nodes for the control flow graph */
+    ControlFlowNode entry, exit;
+    
+    /** Construct a new control flow graph for a function */
+    public FlowGraph( Statement body ) {
+        super();
+        graph = new DGraphAdj<ControlFlowNode,Primitive>();
+        entry = newVertex();
+        exit = newVertex();
+        body.buildGraph(entry, exit, this);
+    }
+    /** Construct a new vertex and add to graph */
+    private ControlFlowNode newVertex() {
+        ControlFlowNode v = new ControlFlowNode();
+        graph.addVertex(v);
+        return v;
+    }
+    /** To construct the control flow graph for a primitive,
+     * one only needs to add an edge labeled with the primitive statement
+     * @param entry vertex already in graph
+     * @param exit vertex already in graph
+     * @param statement labeling the edge
+     */
+    public void buildPrimitive( ControlFlowNode entry, ControlFlowNode exit,
+            Primitive statement ) {
+        graph.addEdge( entry, exit, statement);
+    }
+    
+    /** Calculate the dependencies for this graph */
+    public Dependencies calculateDependencies( 
+            Dependencies entryDependencies ) {
+    	// Keep track of visited nodes in order to account for loops
+    	ArrayList<ControlFlowNode> visited = new ArrayList<ControlFlowNode>();
+    	ArrayList<String> visitedColour = new ArrayList<String>();
+    	// Create the dependency list based off the inputs
+        Dependencies exitDependencies = entryDependencies.copy();
+        // Traverse the graph in a Breadth-First Manner
+        for (ControlFlowNode n : graph) {
+        	visited.add(n);
+        	Dependencies nodeDependencies = new Dependencies();
+        	/* Traverse all the edges adjacent to a given node and calculate
+        	 *  the cumulative dependencies (If it's a select there'll
+        	 *  potentially be more than one dependency) 
+        	 */
+	        for (AdjacentEdge<ControlFlowNode, Primitive> edge : 
+	        	graph.adjacent(n)) {
+	        	nodeDependencies = edge.edgeInfo.
+	        			calculateDependencies(nodeDependencies);
+	        	/* Check to see if the target of the node has already been 
+	        	 * visited. If it has, then we've found a repeat.
+	        	 */
+	        	if (visited.containsKey(edge.target) && visited.get(edge.target)
+	        			.equals("grey")) {
+	        		System.out.println(edge.target);
+	        		visited.put(edge.target, "black");
+	        	}
+	        }
+	        // Merge the new dependencies with the current ones
+	        exitDependencies.mergeDependencies(nodeDependencies);
+        }
+        return exitDependencies;
+    }
+    
+    public String toString() {
+        String result = "Entry = " + entry + " Exit = " + exit + "\n";
+        // As the graph is connected we just print the edges
+        for( ControlFlowNode n : graph ) {
+            for( AdjacentEdge<ControlFlowNode,Primitive> 
+                    e : graph.adjacent(n) ) {
+                result += "  " + n + " -> " + e.target + " " +
+                        e.edgeInfo + " " + "\n";
+            }
+        }
+        return result;
+    }
+    
+    /**
+     * Build a graph representation of the compound statement
+     * 
+     * @param entry2 - The entry node for the compound
+     * @param exit2 - The exit node for the compound
+     * @param compound - The Compound statement itself
+     */
+	public void buildCompound(ControlFlowNode entry2, ControlFlowNode exit2,
+			Compound compound) {
+		// Get size of the statement list
+		int size = compound.getStatements().size();
+		ControlFlowNode vertex, prevVertex;
+		prevVertex = entry2;
+		for (int i = 0; i < size-1; i++) {
+			// add a new vertex for every statement (if size >= 2)
+			vertex = newVertex();
+			// add edge from previous vertex to current one
+			Statement statement = compound.getStatements().get(i);
+			/* If the statement is a primitive, then add the edge
+			 * If it is not a primitive, calculate the graph corresponding
+			 * to the statement (Recurse)
+			 */
+			statement.buildGraph(prevVertex, vertex, this);
+			// update previous vertex to be the current one
+			prevVertex = vertex;
+		}
+		// add an edge between the previous vertex and the exit vertex
+		compound.getStatements().get(size-1).buildGraph(prevVertex, exit2, 
+				this);
+	}
+	
+	/**
+	 * Build a graph representation of the select statement
+	 * 
+	 * @param entry2 - The entry node for the select
+	 * @param exit2 - The exit node for the select
+	 * @param select - The select statement itself
+	 */
+	public void buildSelect(ControlFlowNode entry2, ControlFlowNode exit2,
+			Select select) {
+		// Create an edge between entry and exit for every statement
+		for (Statement s : select.getStatements()) {
+			s.buildGraph(entry2, exit2, this);
+		}
+	}
+	
+	/**
+	 * Build a graph representation of the repeat statement
+	 * 
+	 * @param entry2 - The entry node for the repeat
+	 * @param exit2 - The exit node for the repeat
+	 * @param repeat - The repeat statement itself
+	 */
+	public void buildRepeat(ControlFlowNode entry2, ControlFlowNode exit2,
+			Repeat repeat) {
+		ControlFlowNode enter_body, exit_body;
+		// Need a null statement between entry and exit
+		graph.addEdge(entry2, exit2, new NullStatement(repeat.pos));
+		enter_body = newVertex();
+		exit_body = newVertex();
+		// Need a null statement between entry and enter_body
+		graph.addEdge(entry2, enter_body, new NullStatement(repeat.pos));
+		// Build the graph for the statement
+		repeat.getStatement().buildGraph(enter_body, exit_body, this);
+		// Need a null statement between exit_body and exit
+		graph.addEdge(exit_body, exit2, new NullStatement(repeat.pos));
+		// Need a null statement between exit_body and enter_body
+		graph.addEdge(exit_body, enter_body, new NullStatement(repeat.pos));
+		
+	}
+}

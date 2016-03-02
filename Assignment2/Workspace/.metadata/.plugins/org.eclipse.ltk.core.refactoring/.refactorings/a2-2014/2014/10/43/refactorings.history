@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move element &apos;test05-XMJYAUZ-MZJAWXU.txt&apos; to &apos;test-pgm&apos;&#x0D;&#x0A;- Original project: &apos;a2-2014&apos;&#x0D;&#x0A;- Destination element: &apos;test-pgm&apos;&#x0D;&#x0A;- Original element: &apos;test05-XMJYAUZ-MZJAWXU.txt&apos;&#x0D;&#x0A;- Update references to refactored element" description="Move file" element1="test-pgm/results/test05-XMJYAUZ-MZJAWXU.txt" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.move" policy="org.eclipse.jdt.ui.moveResources" qualified="false" references="true" stamp="1413702108647" target="test-pgm" units="0" version="1.0"/>
+</session>
